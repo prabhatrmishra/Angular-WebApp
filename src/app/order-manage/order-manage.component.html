@@ -1,0 +1,140 @@
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div style="text-align:center">
+    <div class="container">
+    
+        <h2>Place Order(s)</h2>
+        <form class="form-horizontal" action="/action_page.php">
+
+          <br><br>
+          <div *ngIf="isOrderTableActive == true " >
+              <h4>Your Orders</h4>
+            <div class="horizontal-scroll">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="align-right">Order Name</th>
+                    <th class="align-right"> Product Id</th>
+                    <th class="align-right">Order Quantity</th>
+                    <th class="align-right">Contact No</th>
+                    <th class="align-right">Bill No</th>
+                    <th class="align-right">Tenant No</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of ordersList; let i = index" class="no-top-border">
+                    <td ngClass="align-right">{{order.orderName}}</td>
+                     <td ngClass="align-right">{{order.productId}}</td>
+                     <td ngClass="align-right">{{order.orderQuantity}}</td>
+                     <td ngClass="align-right">{{order.contactNo}}</td>
+                    <td class="align-right">{{order.billNo}}</td>
+                    <td class="align-right">{{order.tenantId}}</td>
+               <!--      <td class="align-right"><i class="ion-trash-a" (click)="removeRow(i)"></i></td> -->
+                  </tr>
+                </tbody>
+              </table>
+              <br><br>
+            </div>
+          </div>
+
+
+     <div class="row">    
+        <div class="col-sm-6">  
+          <div class="form-group">
+            <label for="productLists">Select Item Name</label><label class="required"> </label>
+            <!--  <input type="text" class="form-control" id="assetPropertyName"  [(ngModel)] = "addAssetProperty.assetPropertyType" placeholder="Asset Property Type"> -->
+            <select
+              name="productId"
+              id="productId"
+              class="form-control"
+              [(ngModel)]="orderAdd.productId"
+              required>
+              <option
+                *ngFor="let product of productLists"
+                [value]="product.product_id">
+                {{product.product_name }}
+              </option>
+            </select>
+          </div>
+        </div>  
+   
+
+
+        <div class="col-sm-6">  
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Order Name</label>
+            <div class="col-sm-10">          
+              <input type="text" class="form-control" id="type" [(ngModel)] = "orderAdd.orderName"  placeholder="Enter Product Type" name="pwd">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">    
+        <div class="col-sm-6">  
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Order Quantity</label>
+              <div class="col-sm-10">          
+                <input type="text" class="form-control" id="type" [(ngModel)] = "orderAdd.orderQuantity"  placeholder="Enter Quantity" name="pwd">
+              </div>
+            </div>
+          </div>
+ 
+          <div class="col-sm-6"> 
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Contact No</label>
+              <div class="col-sm-10">          
+                <input type="text" class="form-control" id="type" [(ngModel)] = "orderAdd.contactNo"  placeholder="Enter Contact No" name="pwd">
+              </div>
+            </div>
+          </div>  
+        </div>
+
+      <div class="row">  
+        <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Bill No</label>
+              <div class="col-sm-10">          
+                <input type="text" class="form-control" id="type" [(ngModel)] = "orderAdd.billNo"  placeholder="Enter bill No" name="pwd">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Tenant Id</label>
+              <div class="col-sm-10">          
+                <input type="text" class="form-control" id="type" [(ngModel)] = "orderAdd.tenantId"  placeholder="Enter tenant Id" name="pwd">
+              </div>
+            </div>
+          </div>  
+        </div>
+      
+      
+        </form>
+        <br><br><br>
+    <div >
+      <div >
+        <button class="col-md-2 btn btn-primary btn-with-icon" (click)="resetForm()">
+        Reset
+        </button>
+      </div>
+        <div>
+        <button class="col-md-2 btn btn-primary btn-with-icon" (click)="addOrderOnClick()">
+          Add  
+          </button>
+        </div>
+    
+        <div>
+            <button class="col-md-2 btn btn-primary btn-with-icon" (click)="placeOrderOnClick()" [disabled]="ordersList.length == 0" >
+               Submit
+            </button>
+        </div>
+      </div>
+    </div>
+</div>

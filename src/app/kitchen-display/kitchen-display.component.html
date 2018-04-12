@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body bgcolor="#A9A9A9">
+  <!--   <header>
+        <h1>Dilviroo</h1>
+     </header> -->
+<div class="container">
+  
+  <table class="table table-bordered">
+    <thead>
+       <tr>
+          <td>Serial No</td>
+            <td>Order Name</td>
+            <td> Item Name </td>
+            <td> Order Quantity</td>
+           <td>Created Till Date</td>
+           <td>Predicted No</td>
+           <td>Status</td>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of productList ; let index = index " >
+        <td> {{index +1}}</td>
+        <td>{{product.orderName}}</td>
+         <td>{{product.productName}}</td>
+        <td>{{product.orderQuantity}}</td>
+       <td>{{product.createdTillNowNo}}</td>
+       <td>{{product.predictedNo}}</td>
+       <td>
+          
+           <div class="form-group">
+              <button class="col-md-2 btn btn-primary btn-with-icon"  [ngClass]="statusBtnClass[product.orderId]" (click)= "clickChangeStatus(product)"  [disabled]="!dataService.productOrderActivity[product.orderId]" >
+   
+              </button>
+              </div>
+      </td>
+       </tr>
+    </tbody>
+  </table>
+  <div>
+      <div>
+  <button class="col-md-2 btn btn-primary btn-with-icon" (click)="exportToExcel()">
+      Export to Excel
+    </button>
+    </div>
+    <div>
+    <button class="col-md-2 btn btn-primary btn-with-icon" (click)="routeToProductsOnClick()">
+        Manage Products
+      </button>
+    </div>
+
+    <div>
+        <button class="col-md-2 btn btn-primary btn-with-icon" (click)="routeToOrdersOnClick()">
+            Manage Orders
+          </button>
+        </div>
+        
+
+    <div>
+      <button class="col-md-2 btn btn-primary btn-with-icon" (click)="routeToPredictionsOnClick()">
+          Manage Prediction
+        </button>
+      </div>
+      
+  </div>
+</div>
+<!-- <footer>Copyright &copy;Prabhat</footer> -->
+</body>
+</html>
